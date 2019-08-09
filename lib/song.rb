@@ -18,8 +18,32 @@ class Song
     song
   end
 
-  def self.new_by_name(new_name)
+  def self.new_by_name(name)
     song = Song.new
+    song.name = name
+    song
+  end 
+  
+  def self.create_by_name (song_name)
+    song = Song.new
+    song.name = song_name
     song.save
+    song
+  end 
+
+  def self.find_by_name (name)
+    @@all.find{|song| song.name == name}
+    
+  end 
+
+  def self.find_or_create_by_name (song_name)
+    
+    if !self.find_by_name(song_name)
+      blank_space = self.create_by_name(song_name)
+      song_name
+      
+    else 
+      song_name
+    end
   end 
 end
