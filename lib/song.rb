@@ -37,13 +37,38 @@ class Song
   end 
 
   def self.find_or_create_by_name (song_name)
-    
-    if !self.find_by_name(song_name)
-      blank_space = self.create_by_name(song_name)
-      song_name
-      
-    else 
-      song_name
-    end
+    self.find_by_name(song_name) || self.create_by_name(song_name)
+  end 
+
+  def self.alphabetical
+    self.all.sort_by!{|song| song.name}
+  end
+
+  def self.new_from_filename (filename)
+    serperate = filename.split(" - ")
+    artist_name = serperate[0]
+    song_name = serperate[1].gsub(".mp3", "")
+
+    song = Song.new
+    song.artist_name = artist_name
+    song.name = song_name
+    song
+  end 
+
+  def self.create_from_filename (filename)
+    serperate = filename.split(" - ")
+    artist_name = serperate[0]
+    song_name = serperate[1].gsub(".mp3", "")
+
+    song = Song.new
+    song.artist_name = artist_name
+    song.name = song_name
+    song.save 
+    song
+  end 
+
+  def self.destroy_all 
+    @@all.clear  
   end 
 end
+
