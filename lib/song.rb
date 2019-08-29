@@ -32,8 +32,8 @@ class Song
   end
 
   def self.alphabetical
-    new_array= self.all.sort_by {|a| a.name}
-    new_array
+    self.all.sort_by {|a| a.name}
+  
   end
 
   def self.new_from_filename (mp3_file)
