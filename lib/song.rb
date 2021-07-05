@@ -9,5 +9,11 @@ class Song
   def save
     self.class.all << self
   end
-
+  def song.create_from_filename
+    @@all.create_from_filename
+    
+  end
+  def self.destroy_all
+    self.all.clear()
+end
 end
